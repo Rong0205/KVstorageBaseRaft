@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package raftPersistDate;
+
+message LogEntry {
+  int32 term = 1;
+  int32 index = 2;
+  string command = 3;
+}
+
+message PersistRaftNode {
+  int32 current_term = 1;
+  int32 voted_for = 2;
+  int32 last_snapshot_include_index = 3;
+  int32 last_snapshot_include_term = 4;
+  repeated LogEntry logs = 5;
+}

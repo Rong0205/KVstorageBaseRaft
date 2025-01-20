@@ -1,0 +1,62 @@
+[
+{
+  "directory": "/home/rong/KVstorageBaseRaft/build/src/rpcFramework",
+  "command": "/usr/bin/g++   -I/home/rong/KVstorageBaseRaft/example -I/home/rong/KVstorageBaseRaft/src/raftCore/include -I/home/rong/KVstorageBaseRaft/src/raftClerk/include -I/home/rong/KVstorageBaseRaft/src/rpcFramework/include  -g   -std=gnu++2a -o CMakeFiles/mprpc.dir/rpcheader.pb.cc.o -c /home/rong/KVstorageBaseRaft/src/rpcFramework/rpcheader.pb.cc",
+  "file": "/home/rong/KVstorageBaseRaft/src/rpcFramework/rpcheader.pb.cc"
+},
+{
+  "directory": "/home/rong/KVstorageBaseRaft/build/src/rpcFramework",
+  "command": "/usr/bin/g++   -I/home/rong/KVstorageBaseRaft/example -I/home/rong/KVstorageBaseRaft/src/raftCore/include -I/home/rong/KVstorageBaseRaft/src/raftClerk/include -I/home/rong/KVstorageBaseRaft/src/rpcFramework/include  -g   -std=gnu++2a -o CMakeFiles/mprpc.dir/rpcprovider.cc.o -c /home/rong/KVstorageBaseRaft/src/rpcFramework/rpcprovider.cc",
+  "file": "/home/rong/KVstorageBaseRaft/src/rpcFramework/rpcprovider.cc"
+},
+{
+  "directory": "/home/rong/KVstorageBaseRaft/build/src/rpcFramework",
+  "command": "/usr/bin/g++   -I/home/rong/KVstorageBaseRaft/example -I/home/rong/KVstorageBaseRaft/src/raftCore/include -I/home/rong/KVstorageBaseRaft/src/raftClerk/include -I/home/rong/KVstorageBaseRaft/src/rpcFramework/include  -g   -std=gnu++2a -o CMakeFiles/mprpc.dir/mprpcchannel.cc.o -c /home/rong/KVstorageBaseRaft/src/rpcFramework/mprpcchannel.cc",
+  "file": "/home/rong/KVstorageBaseRaft/src/rpcFramework/mprpcchannel.cc"
+},
+{
+  "directory": "/home/rong/KVstorageBaseRaft/build/src/rpcFramework",
+  "command": "/usr/bin/g++   -I/home/rong/KVstorageBaseRaft/example -I/home/rong/KVstorageBaseRaft/src/raftCore/include -I/home/rong/KVstorageBaseRaft/src/raftClerk/include -I/home/rong/KVstorageBaseRaft/src/rpcFramework/include  -g   -std=gnu++2a -o CMakeFiles/mprpc.dir/mprpccontroller.cc.o -c /home/rong/KVstorageBaseRaft/src/rpcFramework/mprpccontroller.cc",
+  "file": "/home/rong/KVstorageBaseRaft/src/rpcFramework/mprpccontroller.cc"
+},
+{
+  "directory": "/home/rong/KVstorageBaseRaft/build/src/raftCore",
+  "command": "/usr/bin/g++   -I/home/rong/KVstorageBaseRaft/example -I/home/rong/KVstorageBaseRaft/src/raftCore/include -I/home/rong/KVstorageBaseRaft/src/raftClerk/include -I/home/rong/KVstorageBaseRaft/src/rpcFramework/include  -g   -std=gnu++2a -o CMakeFiles/mraftCore.dir/kvServerRPC.pb.cc.o -c /home/rong/KVstorageBaseRaft/src/raftCore/kvServerRPC.pb.cc",
+  "file": "/home/rong/KVstorageBaseRaft/src/raftCore/kvServerRPC.pb.cc"
+},
+{
+  "directory": "/home/rong/KVstorageBaseRaft/build/src/raftCore",
+  "command": "/usr/bin/g++   -I/home/rong/KVstorageBaseRaft/example -I/home/rong/KVstorageBaseRaft/src/raftCore/include -I/home/rong/KVstorageBaseRaft/src/raftClerk/include -I/home/rong/KVstorageBaseRaft/src/rpcFramework/include  -g   -std=gnu++2a -o CMakeFiles/mraftCore.dir/raftPersistDate.pb.cc.o -c /home/rong/KVstorageBaseRaft/src/raftCore/raftPersistDate.pb.cc",
+  "file": "/home/rong/KVstorageBaseRaft/src/raftCore/raftPersistDate.pb.cc"
+},
+{
+  "directory": "/home/rong/KVstorageBaseRaft/build/src/raftCore",
+  "command": "/usr/bin/g++   -I/home/rong/KVstorageBaseRaft/example -I/home/rong/KVstorageBaseRaft/src/raftCore/include -I/home/rong/KVstorageBaseRaft/src/raftClerk/include -I/home/rong/KVstorageBaseRaft/src/rpcFramework/include  -g   -std=gnu++2a -o CMakeFiles/mraftCore.dir/raftRPC.pb.cc.o -c /home/rong/KVstorageBaseRaft/src/raftCore/raftRPC.pb.cc",
+  "file": "/home/rong/KVstorageBaseRaft/src/raftCore/raftRPC.pb.cc"
+},
+{
+  "directory": "/home/rong/KVstorageBaseRaft/build/src/raftCore",
+  "command": "/usr/bin/g++   -I/home/rong/KVstorageBaseRaft/example -I/home/rong/KVstorageBaseRaft/src/raftCore/include -I/home/rong/KVstorageBaseRaft/src/raftClerk/include -I/home/rong/KVstorageBaseRaft/src/rpcFramework/include  -g   -std=gnu++2a -o CMakeFiles/mraftCore.dir/raft.cc.o -c /home/rong/KVstorageBaseRaft/src/raftCore/raft.cc",
+  "file": "/home/rong/KVstorageBaseRaft/src/raftCore/raft.cc"
+},
+{
+  "directory": "/home/rong/KVstorageBaseRaft/build/src/raftCore",
+  "command": "/usr/bin/g++   -I/home/rong/KVstorageBaseRaft/example -I/home/rong/KVstorageBaseRaft/src/raftCore/include -I/home/rong/KVstorageBaseRaft/src/raftClerk/include -I/home/rong/KVstorageBaseRaft/src/rpcFramework/include  -g   -std=gnu++2a -o CMakeFiles/mraftCore.dir/Persister.cc.o -c /home/rong/KVstorageBaseRaft/src/raftCore/Persister.cc",
+  "file": "/home/rong/KVstorageBaseRaft/src/raftCore/Persister.cc"
+},
+{
+  "directory": "/home/rong/KVstorageBaseRaft/build/src/raftCore",
+  "command": "/usr/bin/g++   -I/home/rong/KVstorageBaseRaft/example -I/home/rong/KVstorageBaseRaft/src/raftCore/include -I/home/rong/KVstorageBaseRaft/src/raftClerk/include -I/home/rong/KVstorageBaseRaft/src/rpcFramework/include  -g   -std=gnu++2a -o CMakeFiles/mraftCore.dir/raftRpcUtil.cc.o -c /home/rong/KVstorageBaseRaft/src/raftCore/raftRpcUtil.cc",
+  "file": "/home/rong/KVstorageBaseRaft/src/raftCore/raftRpcUtil.cc"
+},
+{
+  "directory": "/home/rong/KVstorageBaseRaft/build/src/raftCore",
+  "command": "/usr/bin/g++   -I/home/rong/KVstorageBaseRaft/example -I/home/rong/KVstorageBaseRaft/src/raftCore/include -I/home/rong/KVstorageBaseRaft/src/raftClerk/include -I/home/rong/KVstorageBaseRaft/src/rpcFramework/include  -g   -std=gnu++2a -o CMakeFiles/mraftCore.dir/util.cc.o -c /home/rong/KVstorageBaseRaft/src/raftCore/util.cc",
+  "file": "/home/rong/KVstorageBaseRaft/src/raftCore/util.cc"
+},
+{
+  "directory": "/home/rong/KVstorageBaseRaft/build/src/raftClerk",
+  "command": "/usr/bin/g++   -I/home/rong/KVstorageBaseRaft/example -I/home/rong/KVstorageBaseRaft/src/raftCore/include -I/home/rong/KVstorageBaseRaft/src/raftClerk/include -I/home/rong/KVstorageBaseRaft/src/rpcFramework/include  -g   -std=gnu++2a -o CMakeFiles/test.dir/test.cc.o -c /home/rong/KVstorageBaseRaft/src/raftClerk/test.cc",
+  "file": "/home/rong/KVstorageBaseRaft/src/raftClerk/test.cc"
+}
+]

@@ -1,0 +1,15 @@
+/home/rong/KVstorageBaseRaft/build/CMakeFiles/rebuild_cache.dir
+/home/rong/KVstorageBaseRaft/build/CMakeFiles/edit_cache.dir
+/home/rong/KVstorageBaseRaft/build/src/CMakeFiles/rebuild_cache.dir
+/home/rong/KVstorageBaseRaft/build/src/CMakeFiles/edit_cache.dir
+/home/rong/KVstorageBaseRaft/build/src/rpcFramework/CMakeFiles/rebuild_cache.dir
+/home/rong/KVstorageBaseRaft/build/src/rpcFramework/CMakeFiles/edit_cache.dir
+/home/rong/KVstorageBaseRaft/build/src/rpcFramework/CMakeFiles/mprpc.dir
+/home/rong/KVstorageBaseRaft/build/src/raftCore/CMakeFiles/rebuild_cache.dir
+/home/rong/KVstorageBaseRaft/build/src/raftCore/CMakeFiles/edit_cache.dir
+/home/rong/KVstorageBaseRaft/build/src/raftCore/CMakeFiles/mraftCore.dir
+/home/rong/KVstorageBaseRaft/build/src/raftClerk/CMakeFiles/rebuild_cache.dir
+/home/rong/KVstorageBaseRaft/build/src/raftClerk/CMakeFiles/edit_cache.dir
+/home/rong/KVstorageBaseRaft/build/src/raftClerk/CMakeFiles/test.dir
+/home/rong/KVstorageBaseRaft/build/example/CMakeFiles/rebuild_cache.dir
+/home/rong/KVstorageBaseRaft/build/example/CMakeFiles/edit_cache.dir

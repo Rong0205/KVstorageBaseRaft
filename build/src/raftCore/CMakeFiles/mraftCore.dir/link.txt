@@ -1,0 +1,2 @@
+/usr/bin/ar qc ../../../lib/libmraftCore.a  CMakeFiles/mraftCore.dir/kvServerRPC.pb.cc.o CMakeFiles/mraftCore.dir/raftPersistDate.pb.cc.o CMakeFiles/mraftCore.dir/raftRPC.pb.cc.o CMakeFiles/mraftCore.dir/raft.cc.o CMakeFiles/mraftCore.dir/Persister.cc.o CMakeFiles/mraftCore.dir/raftRpcUtil.cc.o CMakeFiles/mraftCore.dir/util.cc.o
+/usr/bin/ranlib ../../../lib/libmraftCore.a
