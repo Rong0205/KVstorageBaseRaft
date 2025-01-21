@@ -3,7 +3,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "/home/rong/KVstorageBaseRaft/lib/libmprpc.a"
+			"path" : "/home/rong/KVstorageBaseRaft/lib/libmraftCore.a"
 		}
 	],
 	"backtrace" : 1,
@@ -12,12 +12,13 @@
 		"commands" : 
 		[
 			"add_library",
+			"target_link_libraries",
 			"include_directories",
 			"target_sources"
 		],
 		"files" : 
 		[
-			"src/rpcFramework/CMakeLists.txt",
+			"src/raftCore/CMakeLists.txt",
 			"CMakeLists.txt"
 		],
 		"nodes" : 
@@ -32,34 +33,40 @@
 				"parent" : 0
 			},
 			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 16,
+				"parent" : 0
+			},
+			{
 				"file" : 1
 			},
 			{
-				"command" : 1,
-				"file" : 1,
-				"line" : 17,
-				"parent" : 2
-			},
-			{
-				"command" : 1,
+				"command" : 2,
 				"file" : 1,
 				"line" : 18,
-				"parent" : 2
-			},
-			{
-				"command" : 1,
-				"file" : 1,
-				"line" : 19,
-				"parent" : 2
-			},
-			{
-				"command" : 1,
-				"file" : 1,
-				"line" : 20,
-				"parent" : 2
+				"parent" : 3
 			},
 			{
 				"command" : 2,
+				"file" : 1,
+				"line" : 19,
+				"parent" : 3
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 20,
+				"parent" : 3
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 21,
+				"parent" : 3
+			},
+			{
+				"command" : 3,
 				"file" : 0,
 				"line" : 5,
 				"parent" : 0
@@ -81,19 +88,19 @@
 			"includes" : 
 			[
 				{
-					"backtrace" : 3,
+					"backtrace" : 4,
 					"path" : "/home/rong/KVstorageBaseRaft/example"
 				},
 				{
-					"backtrace" : 4,
+					"backtrace" : 5,
 					"path" : "/home/rong/KVstorageBaseRaft/src/raftCore/include"
 				},
 				{
-					"backtrace" : 5,
+					"backtrace" : 6,
 					"path" : "/home/rong/KVstorageBaseRaft/src/raftClerk/include"
 				},
 				{
-					"backtrace" : 6,
+					"backtrace" : 7,
 					"path" : "/home/rong/KVstorageBaseRaft/src/rpcFramework/include"
 				}
 			],
@@ -103,17 +110,27 @@
 				0,
 				1,
 				2,
-				3
+				3,
+				4,
+				5,
+				6
 			]
 		}
 	],
-	"id" : "mprpc::@8df248e42505ebf16e8c",
-	"name" : "mprpc",
-	"nameOnDisk" : "libmprpc.a",
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 2,
+			"id" : "mprpc::@8df248e42505ebf16e8c"
+		}
+	],
+	"id" : "mraftCore::@b76bab69386807ee0b6c",
+	"name" : "mraftCore",
+	"nameOnDisk" : "libmraftCore.a",
 	"paths" : 
 	{
-		"build" : "src/rpcFramework",
-		"source" : "src/rpcFramework"
+		"build" : "src/raftCore",
+		"source" : "src/raftCore"
 	},
 	"sourceGroups" : 
 	[
@@ -124,34 +141,55 @@
 				0,
 				1,
 				2,
-				3
+				3,
+				4,
+				5,
+				6
 			]
 		}
 	],
 	"sources" : 
 	[
 		{
-			"backtrace" : 7,
+			"backtrace" : 8,
 			"compileGroupIndex" : 0,
-			"path" : "src/rpcFramework/rpcheader.pb.cc",
+			"path" : "src/raftCore/kvServerRPC.pb.cc",
 			"sourceGroupIndex" : 0
 		},
 		{
-			"backtrace" : 7,
+			"backtrace" : 8,
 			"compileGroupIndex" : 0,
-			"path" : "src/rpcFramework/rpcprovider.cc",
+			"path" : "src/raftCore/raftPersistDate.pb.cc",
 			"sourceGroupIndex" : 0
 		},
 		{
-			"backtrace" : 7,
+			"backtrace" : 8,
 			"compileGroupIndex" : 0,
-			"path" : "src/rpcFramework/mprpcchannel.cc",
+			"path" : "src/raftCore/raftRPC.pb.cc",
 			"sourceGroupIndex" : 0
 		},
 		{
-			"backtrace" : 7,
+			"backtrace" : 8,
 			"compileGroupIndex" : 0,
-			"path" : "src/rpcFramework/mprpccontroller.cc",
+			"path" : "src/raftCore/raft.cc",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 8,
+			"compileGroupIndex" : 0,
+			"path" : "src/raftCore/Persister.cc",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 8,
+			"compileGroupIndex" : 0,
+			"path" : "src/raftCore/raftRpcUtil.cc",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 8,
+			"compileGroupIndex" : 0,
+			"path" : "src/raftCore/util.cc",
 			"sourceGroupIndex" : 0
 		}
 	],
