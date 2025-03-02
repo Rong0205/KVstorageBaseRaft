@@ -14,13 +14,14 @@ void testPersister() {
     log1.set_logterm(1);
 
     raftRpcProctoc::LogEntry log2;
-    log1.set_command("test command2");
-    log1.set_logindex(2);
-    log1.set_logterm(2);
+    log2.set_command("test command2");
+    log2.set_logindex(2);
+    log2.set_logterm(2);
 
     mraft.init(std::vector<std::shared_ptr<RaftRpcUtil>>(), 1, persister, std::shared_ptr<LockQueue<ApplyMsg>>(new LockQueue<ApplyMsg>()));
-    // mraft.m_logs.push_back(log1);
-    // mraft.m_logs.push_back(log2);
+    //mraft.m_logs.push_back(log1);
+    //mraft.m_logs.push_back(log2);
+    //std::cout<<mraft.m_logs.size()<<std::endl;
 
     mraft.persist();
 

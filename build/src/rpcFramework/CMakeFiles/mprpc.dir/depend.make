@@ -6,6 +6,9 @@ src/rpcFramework/CMakeFiles/mprpc.dir/mprpcchannel.cc.o: ../src/rpcFramework/inc
 src/rpcFramework/CMakeFiles/mprpc.dir/mprpcchannel.cc.o: ../src/rpcFramework/include/rpcheader.pb.h
 src/rpcFramework/CMakeFiles/mprpc.dir/mprpcchannel.cc.o: ../src/rpcFramework/mprpcchannel.cc
 
+src/rpcFramework/CMakeFiles/mprpc.dir/mprpcconfig.cc.o: ../src/rpcFramework/include/mprpcconfig.h
+src/rpcFramework/CMakeFiles/mprpc.dir/mprpcconfig.cc.o: ../src/rpcFramework/mprpcconfig.cc
+
 src/rpcFramework/CMakeFiles/mprpc.dir/mprpccontroller.cc.o: ../src/rpcFramework/include/mprpccontroller.h
 src/rpcFramework/CMakeFiles/mprpc.dir/mprpccontroller.cc.o: ../src/rpcFramework/mprpccontroller.cc
 

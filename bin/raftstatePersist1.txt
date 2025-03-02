@@ -1,1 +1,0 @@
-Raft state data for testing2

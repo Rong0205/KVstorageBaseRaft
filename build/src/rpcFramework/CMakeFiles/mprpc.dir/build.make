@@ -109,12 +109,26 @@ src/rpcFramework/CMakeFiles/mprpc.dir/mprpccontroller.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/mprpc.dir/mprpccontroller.cc.s"
 	cd /home/rong/KVstorageBaseRaft/build/src/rpcFramework && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/rong/KVstorageBaseRaft/src/rpcFramework/mprpccontroller.cc -o CMakeFiles/mprpc.dir/mprpccontroller.cc.s
 
+src/rpcFramework/CMakeFiles/mprpc.dir/mprpcconfig.cc.o: src/rpcFramework/CMakeFiles/mprpc.dir/flags.make
+src/rpcFramework/CMakeFiles/mprpc.dir/mprpcconfig.cc.o: ../src/rpcFramework/mprpcconfig.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/rong/KVstorageBaseRaft/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object src/rpcFramework/CMakeFiles/mprpc.dir/mprpcconfig.cc.o"
+	cd /home/rong/KVstorageBaseRaft/build/src/rpcFramework && /usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/mprpc.dir/mprpcconfig.cc.o -c /home/rong/KVstorageBaseRaft/src/rpcFramework/mprpcconfig.cc
+
+src/rpcFramework/CMakeFiles/mprpc.dir/mprpcconfig.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/mprpc.dir/mprpcconfig.cc.i"
+	cd /home/rong/KVstorageBaseRaft/build/src/rpcFramework && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/rong/KVstorageBaseRaft/src/rpcFramework/mprpcconfig.cc > CMakeFiles/mprpc.dir/mprpcconfig.cc.i
+
+src/rpcFramework/CMakeFiles/mprpc.dir/mprpcconfig.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/mprpc.dir/mprpcconfig.cc.s"
+	cd /home/rong/KVstorageBaseRaft/build/src/rpcFramework && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/rong/KVstorageBaseRaft/src/rpcFramework/mprpcconfig.cc -o CMakeFiles/mprpc.dir/mprpcconfig.cc.s
+
 # Object files for target mprpc
 mprpc_OBJECTS = \
 "CMakeFiles/mprpc.dir/rpcheader.pb.cc.o" \
 "CMakeFiles/mprpc.dir/rpcprovider.cc.o" \
 "CMakeFiles/mprpc.dir/mprpcchannel.cc.o" \
-"CMakeFiles/mprpc.dir/mprpccontroller.cc.o"
+"CMakeFiles/mprpc.dir/mprpccontroller.cc.o" \
+"CMakeFiles/mprpc.dir/mprpcconfig.cc.o"
 
 # External object files for target mprpc
 mprpc_EXTERNAL_OBJECTS =
@@ -123,9 +137,10 @@ mprpc_EXTERNAL_OBJECTS =
 ../lib/libmprpc.a: src/rpcFramework/CMakeFiles/mprpc.dir/rpcprovider.cc.o
 ../lib/libmprpc.a: src/rpcFramework/CMakeFiles/mprpc.dir/mprpcchannel.cc.o
 ../lib/libmprpc.a: src/rpcFramework/CMakeFiles/mprpc.dir/mprpccontroller.cc.o
+../lib/libmprpc.a: src/rpcFramework/CMakeFiles/mprpc.dir/mprpcconfig.cc.o
 ../lib/libmprpc.a: src/rpcFramework/CMakeFiles/mprpc.dir/build.make
 ../lib/libmprpc.a: src/rpcFramework/CMakeFiles/mprpc.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/rong/KVstorageBaseRaft/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX static library ../../../lib/libmprpc.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/rong/KVstorageBaseRaft/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX static library ../../../lib/libmprpc.a"
 	cd /home/rong/KVstorageBaseRaft/build/src/rpcFramework && $(CMAKE_COMMAND) -P CMakeFiles/mprpc.dir/cmake_clean_target.cmake
 	cd /home/rong/KVstorageBaseRaft/build/src/rpcFramework && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/mprpc.dir/link.txt --verbose=$(VERBOSE)
 

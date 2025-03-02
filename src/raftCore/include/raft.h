@@ -35,6 +35,7 @@ private:
   Status m_status;
   std::mutex m_mtx;
   std::condition_variable m_cv;
+  std::condition_variable m_applyCond;
 
   std::vector<std::shared_ptr<RaftRpcUtil>> m_peers; //与其他结点通信的rpc入口
   std::shared_ptr<Persister> m_persister;            //持久化
@@ -109,12 +110,20 @@ public:
   bool CondInstallSnapshot(int lastIncludedTerm, 
                           int lastIncludedIndex, std::string snapshot);   //和Snapshot功能相同
   std::vector<ApplyMsg> getApplyLogs();                                   //获取待应用的日志条目，将已经提交但尚未应用到状态机的日志条目打包成 ApplyMsg 消息
-
-
   void pushMsgToKvServer(ApplyMsg msg);                                   //给上层的kvserver层发送消息
   void applierTicker();                                                   //定期向状态机写入日志，非重点
   // rf.applyChan <- msg //不拿锁执行  可以单独创建一个线程执行，但是为了同意使用std:thread
   // ，避免使用pthread_create，因此专门写一个函数来执行
+
+  //==========重写基类的rpc方法,因为rpc远程调用真正调用的是该方法==========//
+  //其实就是调一下本地的方法，然后done->run()
+  void AppendEntries(google::protobuf::RpcController *controller, const ::raftRpcProctoc::AppendEntriesArgs *request,
+                     ::raftRpcProctoc::AppendEntriesReply *response, ::google::protobuf::Closure *done) override;
+  void InstallSnapshot(google::protobuf::RpcController *controller,
+                       const ::raftRpcProctoc::InstallSnapshotRequest *request,
+                       ::raftRpcProctoc::InstallSnapshotResponse *response, ::google::protobuf::Closure *done) override;
+  void RequestVote(google::protobuf::RpcController *controller, const ::raftRpcProctoc::RequestVoteArgs *request,
+                   ::raftRpcProctoc::RequestVoteReply *response, ::google::protobuf::Closure *done) override;
 
 
 
@@ -124,15 +133,7 @@ public:
   // 即服务层主动发起请求raft保存snapshot里面的数据，index是用来表示snapshot快照执行到了哪条命令
   
 
-  // 重写基类的rpc方法,因为rpc远程调用真正调用的是这个方法
-  //其实就是调一下本地的方法，然后done->run()
-  void AppendEntries(google::protobuf::RpcController *controller, const ::raftRpcProctoc::AppendEntriesArgs *request,
-                     ::raftRpcProctoc::AppendEntriesReply *response, ::google::protobuf::Closure *done) override;
-  void InstallSnapshot(google::protobuf::RpcController *controller,
-                       const ::raftRpcProctoc::InstallSnapshotRequest *request,
-                       ::raftRpcProctoc::InstallSnapshotResponse *response, ::google::protobuf::Closure *done) override;
-  void RequestVote(google::protobuf::RpcController *controller, const ::raftRpcProctoc::RequestVoteArgs *request,
-                   ::raftRpcProctoc::RequestVoteReply *response, ::google::protobuf::Closure *done) override;
+
 
 };
 

@@ -7,6 +7,7 @@ target_sources(mprpc PRIVATE
     rpcprovider.cc
     mprpcchannel.cc
     mprpccontroller.cc
+    mprpcconfig.cc
 )
 
 # 链接依赖库

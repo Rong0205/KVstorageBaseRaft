@@ -37,15 +37,42 @@ void Raft::init(std::vector<std::shared_ptr<RaftRpcUtil>> peers, int me, std::sh
         }
     }
 
-    // start ticker  开始三个定时器
-    // std::thread t1(&Raft::leaderHearBeatTicker, this);
-    // t1.detach();
+    //start ticker  开始三个定时器
+    std::thread t1(&Raft::leaderHearBeatTicker, this);
+    t1.detach();
 
-    // std::thread t2(&Raft::electionTimeOutTicker, this);
-    // t2.detach();
+    std::thread t2(&Raft::electionTimeOutTicker, this);
+    t2.detach();
 
-    // std::thread t3(&Raft::applierTicker, this);
-    // t3.detach();
+    std::thread t3(&Raft::applierTicker, this);
+    t3.detach();
+}
+
+void Raft::Start(Op command, int* newLogIndex, int* newLogTerm, bool* isLeader) {
+    std::unique_lock<std::mutex> lock(m_mtx);
+    if (m_status != Leader) {
+        DPrintf("[func-Start-rf{%d}]  is not leader");
+        *newLogIndex = -1;
+        *newLogTerm = -1;
+        *isLeader = false;
+        return;
+    }
+
+    raftRpcProctoc::LogEntry newLogEntry;
+    newLogEntry.set_command(command.asString());
+    newLogEntry.set_logterm(m_currentTerm);
+    newLogEntry.set_logindex(getNewCommandIndex());
+    m_logs.emplace_back(std::move(newLogEntry));
+
+    int lastLogIndex = getLastLogIndex();
+
+    // leader应该不停的向各个Follower发送AE来维护心跳和保持日志同步，目前的做法是新的命令来了不会直接执行，而是等待leader的心跳触发
+    DPrintf("[func-Start-rf{%d}]  lastLogIndex:%d,command:%s\n", m_me, lastLogIndex, &command);
+    // rf.timer.Reset(10) //接收到命令后马上给follower发送,改成这样不知为何会出现问题，待修正 todo
+    persist();
+    *newLogIndex = m_logs.back().logindex();
+    *newLogTerm = m_logs.back().logterm();
+    *isLeader = true;
 }
 
 void Raft::electionTimeOutTicker() {
@@ -270,27 +297,32 @@ void Raft::RequestVote(const raftRpcProctoc::RequestVoteArgs *args, raftRpcProct
 
 void Raft::leaderHearBeatTicker() {
     while (true) {
-        // 如果当前节点不是 Leader，则等待
-        if (m_status != Leader) {
         std::unique_lock<std::mutex> lock(m_mtx);
+        // 等待直到状态变为 Leader 或超时
         m_cv.wait_for(lock, std::chrono::milliseconds(HeartBeatTimeout), [this] {
-            return m_status == Leader;  // 等待状态变为 Leader
+            return m_status == Leader;
         });
-        continue;
+
+        // 如果当前不是 Leader，继续等待
+        if (m_status != Leader) {
+            continue;
         }
 
+        // ------ 以下是 Leader 状态下的逻辑 ------
+
         auto nowTime = now();
-        m_mtx.lock();
         auto suitableSleepTime = std::chrono::milliseconds(HeartBeatTimeout) + m_lastResetHearBeatTime - nowTime;
-        m_mtx.unlock();
 
         if (suitableSleepTime.count() < 1) {
             suitableSleepTime = std::chrono::milliseconds(1);
         }
 
+        lock.unlock();
+
         std::this_thread::sleep_for(suitableSleepTime);//用优化条件变量
 
-        m_mtx.lock();
+        lock.lock();
+
         if ((m_lastResetHearBeatTime - nowTime).count() > 0) { // 说明睡眠的这段时间有重置定时器，那么就没有超时，再次睡眠
             continue;
         }
@@ -413,6 +445,7 @@ bool Raft::sendAppendEntries(int server, std::shared_ptr<raftRpcProctoc::AppendE
             // 说白了就是只有当前term有日志提交才会提交
             if (args->entries_size() > 0 && args->entries(args->entries_size() - 1).logterm() == m_currentTerm) {
                 m_commitIndex = std::max(m_commitIndex, args->prevlogindex() + args->entries_size());
+                m_applyCond.notify_one(); // 唤醒 applierTicker
             }
         }
     }
@@ -507,7 +540,6 @@ void Raft::AppendEntries1(const raftRpcProctoc::AppendEntriesArgs *args, raftRpc
 
 
   //=========恒久化函数==============//
-  //持久化节点当前信息
 void Raft::persist() {
     auto data = persistData();
     m_persister->SaveRaftState(data);
@@ -515,22 +547,22 @@ void Raft::persist() {
 
 //将节点信息进行序列化
 std::string Raft::persistData() {   
-    raftPersistDate::PersistRaftNode* persistRaftNode;
+    raftPersistDate::PersistRaftNode persistRaftNode;
     // 填充 protobuf 消息
-    persistRaftNode->set_current_term(m_currentTerm);
-    persistRaftNode->set_voted_for(m_votedFor);
-    persistRaftNode->set_last_snapshot_include_index(m_lastSnapshotIncludeIndex);
-    persistRaftNode->set_last_snapshot_include_term(m_lastSnapshotIncludeTerm);
+    persistRaftNode.set_current_term(m_currentTerm);
+    persistRaftNode.set_voted_for(m_votedFor);
+    persistRaftNode.set_last_snapshot_include_index(m_lastSnapshotIncludeIndex);
+    persistRaftNode.set_last_snapshot_include_term(m_lastSnapshotIncludeTerm);
 
     for (raftRpcProctoc::LogEntry& item : m_logs) {
-        raftPersistDate::LogEntry* logEntry = persistRaftNode->add_logs();
+        raftPersistDate::LogEntry* logEntry = persistRaftNode.add_logs();
         logEntry->set_term(item.logterm());
         logEntry->set_index(item.logindex());
         logEntry->set_command(item.command());
     }
 
     // 序列化为字符串
-    return persistRaftNode->SerializeAsString();
+    return persistRaftNode.SerializeAsString();
 }
 
 
@@ -752,6 +784,7 @@ void Raft::leaderUpdateCommitIndex() {
         // !!!只有当前term有新提交的，才会更新commitIndex！！！！
         if (sum >= m_peers.size() / 2 + 1 && getLogTermFromLogIndex(index) == m_currentTerm) {
         m_commitIndex = index;
+        m_applyCond.notify_one(); // 唤醒 applierTicker
         break;
         }
     }
@@ -840,9 +873,54 @@ std::vector<ApplyMsg> Raft::getApplyLogs() {
 }
 
 void Raft::pushMsgToKvServer(ApplyMsg msg) {
-
+    applyChan->Push(msg);
 }
 
 void Raft::applierTicker() {
-    
+    while (true) {
+        std::vector<ApplyMsg> applyMsgs;
+        {
+            std::unique_lock<std::mutex> lock(m_mtx);
+            // 如果没有新日志，进入休眠
+            if (m_lastApplied >= m_commitIndex) {
+                m_applyCond.wait(lock, [this] {
+                    return m_lastApplied < m_commitIndex; // 唤醒条件
+                });
+            }
+            if (m_status == Leader) {
+            DPrintf("[Raft::applierTicker() - raft{%d}]  m_lastApplied{%d}   m_commitIndex{%d}", m_me, m_lastApplied,
+                    m_commitIndex);
+            }
+            applyMsgs = getApplyLogs();
+        }
+        //使用匿名函数是因为传递管道的时候不用拿锁
+        // todo:好像必须拿锁，因为不拿锁的话如果调用多次applyLog函数，可能会导致应用的顺序不一样
+        if (!applyMsgs.empty()) {
+        DPrintf("[func- Raft::applierTicker()-raft{%d}] 向kvserver報告的applyMsgs長度爲：{%d}", m_me, applyMsgs.size());
+        }
+        for (auto& message : applyMsgs) {
+        applyChan->Push(message);
+        }
+    }
+}
+
+ //==========重写基类的rpc方法,因为rpc远程调用真正调用的是该方法==========//
+void Raft::AppendEntries(google::protobuf::RpcController* controller,
+                         const ::raftRpcProctoc::AppendEntriesArgs* request,
+                         ::raftRpcProctoc::AppendEntriesReply* response, ::google::protobuf::Closure* done) {
+    AppendEntries1(request, response);
+    done->Run();
+}
+
+void Raft::InstallSnapshot(google::protobuf::RpcController* controller,
+                           const ::raftRpcProctoc::InstallSnapshotRequest* request,
+                           ::raftRpcProctoc::InstallSnapshotResponse* response, ::google::protobuf::Closure* done) {
+    InstallSnapshot(request, response);
+    done->Run();
+}
+
+void Raft::RequestVote(google::protobuf::RpcController* controller, const ::raftRpcProctoc::RequestVoteArgs* request,
+                       ::raftRpcProctoc::RequestVoteReply* response, ::google::protobuf::Closure* done) {
+    RequestVote(request, response);
+    done->Run();
 }

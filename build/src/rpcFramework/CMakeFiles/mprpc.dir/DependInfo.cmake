@@ -5,6 +5,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
   "/home/rong/KVstorageBaseRaft/src/rpcFramework/mprpcchannel.cc" "/home/rong/KVstorageBaseRaft/build/src/rpcFramework/CMakeFiles/mprpc.dir/mprpcchannel.cc.o"
+  "/home/rong/KVstorageBaseRaft/src/rpcFramework/mprpcconfig.cc" "/home/rong/KVstorageBaseRaft/build/src/rpcFramework/CMakeFiles/mprpc.dir/mprpcconfig.cc.o"
   "/home/rong/KVstorageBaseRaft/src/rpcFramework/mprpccontroller.cc" "/home/rong/KVstorageBaseRaft/build/src/rpcFramework/CMakeFiles/mprpc.dir/mprpccontroller.cc.o"
   "/home/rong/KVstorageBaseRaft/src/rpcFramework/rpcheader.pb.cc" "/home/rong/KVstorageBaseRaft/build/src/rpcFramework/CMakeFiles/mprpc.dir/rpcheader.pb.cc.o"
   "/home/rong/KVstorageBaseRaft/src/rpcFramework/rpcprovider.cc" "/home/rong/KVstorageBaseRaft/build/src/rpcFramework/CMakeFiles/mprpc.dir/rpcprovider.cc.o"
